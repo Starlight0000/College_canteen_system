@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DineDynamo • Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS can be added here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background-image: url("https://images.squarespace-cdn.com/content/v1/545c4607e4b0f8d97a394c9a/1668443127519-3ZNCG4ZJLH49SV9QHD4S/A.ETLING+photography+-+02.28.2022+-_DSC8769.jpg?format=2500w");
+            background-color: #aaaaaa;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the last value for transparency */
+            border-radius: 25px; /* Adds rounded corners */
+        }
+
+        .card-header {
+            background-color:rgba(255, 255, 255, 0); /* Change the header background color */
+            color: black;
+            text-align: center;
+            border-top-left-radius: 25px; /* Rounded top-left corner */
+            border-top-right-radius: 25px; /* Rounded top-right corner */
+        }
+
+        .otp-box {
+            display: none;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .btn {
+            border-radius: 5px; /* Adds rounded corners to buttons */
+        }
+
+        .with-underline {
+            border: none;
+            background-color:rgba(255, 255, 255, 0);
+            border-bottom: 2px solid #007BFF; /* Change the color as needed */
+            border-radius: 0; /* Remove any existing border-radius */
+        }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Login</h1>
+                </div>
+                <div class="card-body">
+                    <form id="phoneForm" method="POST">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number:</label>
+                            <input type="tel" class="form-control with-underline" id="phoneNumber" name="phoneNumber" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send OTP</button>
+                    </form>
+                    <div class="otp-box" id="otpBox">
+                        <h2 class="text-center">Enter OTP</h2>
+                        <form id="otpForm" action="/api/v1/verifyOTP" method="POST">
+                            <div class="form-group">
+                                <label for="otp">OTP:</label>
+                                <input type="text" class="form-control with-underline" id="otp" name="otp" required>
+                            </div>
+                            <input type="hidden" id="otpPhoneNumber" name="phoneNumber">
+                            <button type="submit" class="btn btn-primary btn-block">Submit OTP</button>
+                        </form>
+                    </div>
+                </div>
+                <button id="testButton" class="btn btn-success btn-block">Test</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    const phoneForm = document.getElementById("phoneForm");
+    const testButton = document.getElementById("testButton");
+    const otpBox = document.getElementById("otpBox");
+
+    testButton.addEventListener("click", function () {
+        // Redirect to the testdashboard.html page when the "Test" button is clicked
+        window.location.href = "testdashboard";
+    });
+
+    phoneForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const phoneNumber = document.getElementById("phoneNumber").value;
+
+        const otpPhoneNumberInput = document.getElementById("otpPhoneNumber");
+        otpPhoneNumberInput.value = phoneNumber;
+
+
+        // Make an AJAX request to the server to check if the phone number exists
+        fetch("/api/v1/checkPhoneNumber?phoneNumber=" + phoneNumber)
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists) {
+                    // If the phone number exists, hide the phone form and show the OTP box
+                    phoneForm.style.display = "none";
+                    otpBox.style.display = "block";
+                    alert("Phone number exists.");
+                } else {
+                    // Handle the case where the phone number doesn't exist (e.g., show an error message)
+                    alert("Phone number does not exist.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS */
+        body {
+            background-color: #f8f9fa; /* Background color */
+            margin: 0; /* Remove the default margin */
+            padding: 0; /* Remove any default padding */
+            font-family: Arial, sans-serif; /* Specify a fallback font */
+        }
+        .container {
+            background-color: #ffffff; /* Container background color */
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+        .table-container {
+            float: left; /* Move the table to the left side */
+            width: 65%; /* Adjust the width as needed */
+        }
+        .table {
+            border: 1px solid #dee2e6; /* Table border color */
+            border-radius: 8px;
+        }
+        .table th {
+            background-color: #007bff; /* Header background color */
+            color: #fff; /* Header text color */
+        }
+        .item-image {
+            max-width: 100px; /* Set the maximum image width */
+            max-height: 100px; /* Set the maximum image height */
+        }
+        h1 {
+            color: #007bff; /* Heading text color */
+        }
+        /* New button styles */
+        .btn-qr-code {
+            background-color: #28a745; /* QR code button background color */
+            color: white; /* Text color */
+            font-weight: bold;
+        }
+        .btn-place-order {
+            background-color: #007bff; /* Place Order button background color */
+            color: white; /* Text color */
+            font-weight: bold;
+        }
+        /* Checkout summary styles */
+        .checkout-summary {
+            float: right; /* Move the summary to the right side */
+            width: 30%; /* Adjust the width as needed */
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+        .summary-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .summary-total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        /* Additional CSS for QR code */
+        .qr-code-container {
+            text-align: center; /* Center the QR code content */
+            margin-top: 20px; /* Add some spacing between the QR code and the other content */
+        }
+        .qr-code-image {
+            max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .qr-code-text {
+            margin-top: 10px; /* Add spacing between the QR code and text */
+        }
+        .email-text {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+        <h1 class="text-center">Your Cart</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Item Image</th>
+                <th>Item Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Use Thymeleaf for loop to iterate over items -->
+            <tr th:each="item : ${cartitems}">
+                <td>
+                    <img th:src="${item.image}" class="item-image" alt="Item Image" />
+                </td>
+                <td th:text="${item.name}">Item Name</td>
+                <td th:text="${item.price}">$0.00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Checkout summary -->
+    <div class="checkout-summary">
+        <h2 class="summary-title">Order Summary</h2>
+        <p>Total Items: <span th:text="${countitems}">X</span></p>
+        <p class="summary-total">Total: ₹<span th:text="${itemtotal}">XXX.XX</span></p>
+
+        <!-- Add QR code content -->
+        <div class="qr-code-container">
+            <h3> Token Number : <span th:text="${tokennumber}"></span></h3>
+            <div class="qr-code-text">
+                <p class="email-text">Please make the payment by sending the amount to the following UPI:</p>
+                <h4>saiannessha.v@oksbi</h4>
+            </div>
+        </div>
+
+        <!-- Add Place Order button -->
+        <button class="btn btn-place-order">Place Order</button>
+    </div>
+</div>
+
+<!-- Include Bootstrap JavaScript (optional, but required for some Bootstrap features) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

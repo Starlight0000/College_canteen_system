@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DineDynamo &bull; Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+    background-color: #f0f8ff; /* Light blue background color */
+    padding: 20px;
+}
+
+.form-signup {
+    background-color: #fff; /* White background color for the form */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.form-signup h2 {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* Button color on hover */
+    border-color: #0056b3;
+}
+
+</style>
+    <style>
+        body {
+            background-image: url('https://images.squarespace-cdn.com/content/v1/545c4607e4b0f8d97a394c9a/1668443127519-3ZNCG4ZJLH49SV9QHD4S/A.ETLING+photography+-+02.28.2022+-_DSC8769.jpg?format=2500w'); /* Replace 'your-image.jpg' with the actual file name of your image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="/api/v1/createUser" method="POST" class="form-signup">
+                <h2 class="text-center">Sign Up</h2>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rollNumber">Roll Number:</label>
+                    <input type="text" class="form-control" id="rollNumber" name="rollNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

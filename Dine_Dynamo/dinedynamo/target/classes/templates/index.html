@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Cards</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <style>
+        /* Custom CSS for the cards */
+        .custom-card {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .custom-card:hover {
+            background-color: orange;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="container">
+        <div class="row">
+            <!-- Thymeleaf loop to iterate over items -->
+            <div class="col-md-3" th:each="item : ${items}">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <!-- Display item name and price from the model -->
+                        <h5 class="card-title" th:text="${item.name}"></h5>
+                        <p class="card-text" th:text="${item.price}"></p>
+                        <img th:src="${item.image}" class="card-img-top" alt="${item.name}+picture" width="150px" height="300px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS (Optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
